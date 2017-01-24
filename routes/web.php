@@ -11,6 +11,19 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/*Home*/
+Route::get('/', [
+	'uses' => '\Lara\Http\Controllers\HomeController@index',
+	'as' => 'home',
+]);
+
+/*Authentication*/
+Route::get('/signup', [
+	'uses' => '\Lara\Http\Controllers\AuthController@getSignup',
+	'as' => 'auth.signup',
+]);
+
+Route::post('/signup', [
+	'uses' => '\Lara\Http\Controllers\AuthController@postSignup',
+	
+]);

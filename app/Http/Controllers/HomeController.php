@@ -1,4 +1,4 @@
-</php
+<?php
 
 namespace Lara\Http\Controllers;
 
