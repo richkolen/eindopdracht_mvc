@@ -1,24 +1,16 @@
 @extends('templates.default')
 	
 @section('content')
-	<h3>Meld jezelf aan</h3>
-	
+	<h3>Inloggen</h3>
+
 	<div class="row">
 		<div class="col-lg-6">
-			<form class="form-vertical" role="form" method="post" action="{{ route('auth.signup') }}">
+			<form class="form-vertical" role="form" method="post" action="{{ route('auth.signin') }}">
 				<div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
 					<label for="email" class="control-label">E-mail</label>
 					<input type="text" name="email" class="form-control" id="email" value="{{ Request::old('email') ?: '' }}">
 					@if ($errors->has('email'))
 						<span class="help-block">{{ $errors->first('email') }}</span>
-					@endif
-				</div>
-
-				<div class="form-group{{ $errors->has('username') ? ' has-error' : '' }}">
-					<label for="username" class="control-label">Gebruikersnaam</label>
-					<input type="text" name="username" class="form-control" id="username" value="{{ Request::old('username') ?: '' }}">
-					@if ($errors->has('username'))
-						<span class="help-block">{{ $errors->first('username') }}</span>
 					@endif
 				</div>
 
@@ -30,8 +22,14 @@
 					@endif
 				</div>
 
+				<div class="checkbox">
+					<label>
+						<input type="checkbox" name="remember"> Onthoud mij
+					</label>
+				</div>
+
 				<div class="form-group">
-					<button type="submit" class="btn btn-default">Inschrijven</button>
+					<button type="submit" class="btn btn-default">Inloggen</button>
 				</div>
 				<input type="hidden" name="_token" value="{{ Session::token() }}">
 			</form>

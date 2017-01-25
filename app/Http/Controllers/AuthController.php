@@ -2,6 +2,7 @@
 
 namespace Lara\Http\Controllers;
 
+use Auth;
 use Illuminate\Http\Request;
 use Lara\Models\User;
 
@@ -30,4 +31,32 @@ class AuthController extends Controller
 			->route('home')
 			->with('info', 'Je bent nu lid van Lara. Je kunt inloggen met jouw gegevens');
 	}
+
+	public function getSignin ()
+	{
+		return view('auth.signin');
+	}
+
+	public function postSignin(Request $request)
+	{
+		$this->validate($request, [
+			'email' => 'required',
+			'password' => 'required',
+		]);
+
+		if (!Auth::attempt($request->only(['email', 'password']), $request->has('remember')))
+		{
+			return redirect()->back()->with('info', 'Jouw inloggegevens zijn niet correct');
+		}
+
+		return redirect()->route('home')->with('info', 'Je bent nu ingelogd');
+	}
+
+	public function getSignOut()
+	{
+		Auth::logout();
+
+		return redirect()->route('home')->with('info', 'Je bent nu uitgelogd');;
+	}
+
 }

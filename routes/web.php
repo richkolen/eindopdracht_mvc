@@ -21,9 +21,34 @@ Route::get('/', [
 Route::get('/signup', [
 	'uses' => '\Lara\Http\Controllers\AuthController@getSignup',
 	'as' => 'auth.signup',
+	'middleware' => ['guest'],
 ]);
 
 Route::post('/signup', [
 	'uses' => '\Lara\Http\Controllers\AuthController@postSignup',
-	
+	'middleware' => ['guest'],
 ]);
+
+Route::get('/signin', [
+	'uses' => '\Lara\Http\Controllers\AuthController@getSignin',
+	'as' => 'auth.signin',
+	'middleware' => ['guest'],
+]);
+
+Route::post('/signin', [
+	'uses' => '\Lara\Http\Controllers\AuthController@postSignin',
+	'middleware' => ['guest'],
+]);
+
+Route::get('/signout', [
+	'uses' => '\Lara\Http\Controllers\AuthController@getSignOut',
+	'as' => 'auth.signout',
+]);
+
+/*Search*/
+Route::get('/search', [
+	'uses' => '\Lara\Http\Controllers\SearchController@getResults',
+	'as' => 'search.results',
+]);
+
+
