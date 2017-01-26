@@ -17,6 +17,7 @@ Route::get('/', [
 	'as' => 'home',
 ]);
 
+
 /*Authentication*/
 Route::get('/signup', [
 	'uses' => '\Lara\Http\Controllers\AuthController@getSignup',
@@ -45,10 +46,61 @@ Route::get('/signout', [
 	'as' => 'auth.signout',
 ]);
 
+
 /*Search*/
 Route::get('/search', [
 	'uses' => '\Lara\Http\Controllers\SearchController@getResults',
 	'as' => 'search.results',
 ]);
+
+
+/*UserProfile*/
+Route::get('/user/{username}', [
+	'uses' => '\Lara\Http\Controllers\ProfileController@getProfile',
+	'as' => 'profile.index',
+]);
+
+Route::get('/profile/edit', [
+	'uses' => '\Lara\Http\Controllers\ProfileController@getProfileEdit',
+	'as' => 'profile.edit',
+	'middleware' => ['auth'],
+]);
+
+Route::post('/profile/edit', [
+	'uses' => '\Lara\Http\Controllers\ProfileController@postProfileEdit',
+	'middleware' => ['auth'],
+]);
+
+
+/*Friends*/
+Route::get('/friends', [
+	'uses' => '\Lara\Http\Controllers\FriendController@getIndex',
+	'as' => 'friend.index',
+	'middleware' => ['auth'],
+]);
+
+Route::get('/friends/add/{username}', [
+	'uses' => '\Lara\Http\Controllers\FriendController@getTheRequest',
+	'as' => 'friend.add',
+	'middleware' => ['auth'],
+]);
+
+Route::get('/friends/accept/{username}', [
+	'uses' => '\Lara\Http\Controllers\FriendController@getAcceptRequest',
+	'as' => 'friend.accept',
+	'middleware' => ['auth'],
+]);
+
+
+/*Post Status*/
+Route::post('/status', [
+	'uses' => '\Lara\Http\Controllers\StatusController@postStatus',
+	'as' => 'status.post',
+	'middleware' => ['auth'],
+]);
+
+
+
+
 
 

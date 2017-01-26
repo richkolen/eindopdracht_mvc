@@ -7,8 +7,8 @@
                 <div class="collapse navbar-collapse">
                         @if (Auth::check())
                         <ul class="nav navbar-nav">
-                                <li><a href="#">Overzicht</a></li>
-                                <li><a href="#">Connecties</a></li>
+                                <li><a href="{{ route('home') }}">Overzicht</a></li>
+                                <li><a href="{{ route('friend.index') }}">Connecties</a></li>
                         </ul>
                        
                         <form action="{{ route('search.results') }}" role="search" class="navbar-form navbar-left">
@@ -21,8 +21,8 @@
                         @endif
                         <ul class="nav navbar-nav navbar-right">
                                 @if(Auth::check())
-                                <li><a href="#">{{ Auth::user()->getNameOrUsername() }}</a></li>
-                                <li><a href="#">Profiel bijwerken</a></li>
+                                <li><a href="{{ route('profile.index', ['username'=> Auth::user()->username]) }}">{{ Auth::user()->getNameOrUsername() }}</a></li>
+                                <li><a href="{{ route('profile.edit') }}">Profiel bijwerken</a></li>
                                 <li><a href="{{ route('auth.signout') }}">Uitloggen</a></li>
                                 @else
                                 <li><a href="{{ route('auth.signup') }}">Inschrijven</a></li>
